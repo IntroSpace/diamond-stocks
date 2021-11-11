@@ -15,8 +15,6 @@ PyQt5-stubs==5.15.2.0
 pyqtgraph==0.12.3
 PyQtWebEngine==5.15.5
 PyQtWebEngine-Qt5==5.15.2
-requests==2.26.0
 typing-extensions==3.10.0.2
-urllib3==1.26.7
 XlsxWriter==3.0.2
 yarl==1.7.2

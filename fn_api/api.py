@@ -31,6 +31,7 @@ def API_call(func):
                 raise APIError('Извините, бесплатное API ограничено. Данную компанию выбрать нельзя')
         # в противном случае передаем данные
         return response
+
     return handler
 
 

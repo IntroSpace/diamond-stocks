@@ -25,7 +25,7 @@ class NoteEditorWidget(QWidget, note_editor.Ui_Form):
         """
         Окно(виджет) для редактирования заметок у избранных компаний.
 
-        :param parent: Класс, вызывающего виджета, для работы с его элементами, функциями и переменными.
+        :param parent: Класс вызывающего виджета для работы с его элементами, функциями и переменными
         :type parent: QWidget
         """
         super(NoteEditorWidget, self).__init__()
@@ -60,7 +60,7 @@ class NoteEditorWidget(QWidget, note_editor.Ui_Form):
         # т.к. объект None не имеет метода .text(), будет возвращена ошибка
         # чтобы этого избежать, использован оператор or
         # если self.sender вернёт None, то будет выбран self.button_cancel
-        if (self.sender() or self.button_cancel).text() == 'Сохранить'\
+        if (self.sender() or self.button_cancel).text() == 'Сохранить' \
                 or self.note_text.text() == self.initial:
             # если условия выполняются, пропускаем окно подтверждения
             self.message_exit = QMessageBox.Yes
@@ -98,12 +98,12 @@ class UpdatesInPricesWidget(QWidget, updates_in_prices.Ui_Form):
         super(UpdatesInPricesWidget, self).__init__()
         self.setupUi(self)
         # сохраняем всю новую информацию
-        self.parent_w = parent_w    # класс родителя
-        self.date = date            # дата обновления данных, с которыми сравниваем обновленные данные
-        self.diff_c = diff_c        # разница в close цене
-        self.diff_o = diff_o        # разница в open цене
-        self.diff_h = diff_h        # разница в high цене
-        self.diff_l = diff_l        # разница в low цене
+        self.parent_w = parent_w  # класс родителя
+        self.date = date  # дата обновления данных, с которыми сравниваем обновленные данные
+        self.diff_c = diff_c  # разница в close цене
+        self.diff_o = diff_o  # разница в open цене
+        self.diff_h = diff_h  # разница в high цене
+        self.diff_l = diff_l  # разница в low цене
         self.initUi()
 
     def initUi(self):
@@ -189,7 +189,7 @@ class FileSaveWidget(QWidget, filesave_widget.Ui_Form):
         # если поле ввода не пустое, то записываем новое название файла в БД
         if filename := self.filename.text():
             self.db.update_set_filename(self.ticker, filename)
-        if 'Сохранить' in (self.sender() or self.cancel).text()\
+        if 'Сохранить' in (self.sender() or self.cancel).text() \
                 or not filename:
             # если была нажата любая из кнопок для сохранения
             # или была нажата кнопка отмены, но поле ввода пустое
@@ -259,7 +259,7 @@ class CompanyInfoWidget(QWidget, Ui_Form):
         # расставляем кнопкам иконки и подсказки, а также соединяем сигналы и слоты
         self.download.setIcon(QIcon('src/icons/download.png'))
         self.download.clicked.connect(self.download_info)
-        self.download.setToolTip('Импорт данных')
+        self.download.setToolTip('Экспорт данных')
         self.open_note.setIcon(QIcon('src/icons/note.png'))
         self.open_note.clicked.connect(self.show_note)
         self.open_note.setToolTip('Показать заметку')
@@ -382,7 +382,7 @@ class CompanyInfoWidget(QWidget, Ui_Form):
     @pyqtSlot(bytes)
     def set_logo(self, data):
         # если логотип загружен для другой компании, ничего не обновляется
-        if self.sender().symbol != self.symbol.text():
+        if self.sender() is None or self.sender().symbol != self.symbol.text():
             return
         # если всё нормально, заносим логотип в pixmap
         pixmap = QPixmap()
